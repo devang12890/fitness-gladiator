@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment - Fitness Gladiator</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0b6efd);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .payment-container {
+      max-width: 500px;
+      width: 90%;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .payment-container h2 {
+      margin-bottom: 1rem;
+      color: #0b6efd;
+    }
+
+    .payment-container p {
+      margin: 0.5rem 0;
+    }
+
+    .amount {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #0b6efd;
+      margin: 1rem 0 2rem;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .payment-options a,
+    .payment-options button,
+    .back-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .upi-btn {
+      background: #e08442;
+      color: #fff;
+    }
+
+    .card-btn {
+      background: #e08442;
+      color: #fff;
+    }
+
+    .back-btn {
+      background: #444;
+      color: #fff;
+      margin-top: 1.5rem;
+    }
+
+    .payment-options a:hover,
+    .payment-options button:hover,
+    .back-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* ...existing code... */
+.payment-options img {
+  display: block;
+  margin: 0.5rem auto 0 auto;
+  max-width: 200px;
+  width: 100%;
+  border: 2px solid #eee;
+  border-radius: 10px;
+}
+/* ...existing code... */
+  </style>
+</head>
+<body>
+
+<div class="payment-container">
+  <h2>Complete Your Payment</h2>
+  <p id="planText"></p>
+  <p id="amountText" class="amount"></p>
+
+  <div style="margin-top:1rem;"></div>
+  <div class="payment-options">
+    <a id="upiLink" class="upi-btn">💳 Pay via UPI</a>
+    <div style="margin-top:1rem;">
+  <p>Or scan & pay:</p>
+  <img src="QR code.jpg" alt="UPI QR Code" style="max-width:200px;width:100%;border:2px solid #eee;border-radius:10px;" >
+</div>
+  </div>
+  <a href="index.html#plans" class="back-btn">⬅ Back to Memberships</a>
+</div>
+<script>
+  // Get plan & amount from URL
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get("plan");
+  const amount = params.get("amount");
+
+  document.getElementById("planText").textContent = `Selected Plan: ${plan}`;
+  document.getElementById("amountText").textContent = `Amount: ₹${amount}`;
+
+ // Setup UPI link
+const upiId = "vishwanetra7901@sbi"; // no space!
+document.getElementById("upiLink").href =
+  `upi://pay?pa=${upiId}&pn=FitnessGladiator&am=${amount}&cu=INR`;
+
+  // Razorpay flow (stub)
+  function payWithRazorpay() {
+    alert(`Redirecting to Razorpay for ₹${amount}...`);
+    // Insert Razorpay integration here
+  }
+</script>
+
+</body>
+</html>
